@@ -1,0 +1,11 @@
+name: pub_update
+description: A Dart package which enables checking whether a package is up to date.
+version: 1.0.0+1
+publish_to: none
+
+environment:
+  sdk: ">=2.13.0 <3.0.0"
+
+dev_dependencies:
+  test: ^1.17.0
+  very_good_analysis: ^2.3.0
