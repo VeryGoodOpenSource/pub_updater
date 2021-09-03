@@ -131,8 +131,7 @@ void main() {
             true);
       });
 
-      test('returns false when currentVersion < latestVersion (all)',
-          () async {
+      test('returns false when currentVersion < latestVersion (all)', () async {
         when(() => response.body).thenReturn(responseBody);
         expect(
             await pubUpdate.isUpToDate(
@@ -142,8 +141,7 @@ void main() {
             false);
       });
 
-      test('returns true when currentVersion == latestVersion (all)',
-          () async {
+      test('returns true when currentVersion == latestVersion (all)', () async {
         when(() => response.body).thenReturn(responseBody);
         expect(
             await pubUpdate.isUpToDate(

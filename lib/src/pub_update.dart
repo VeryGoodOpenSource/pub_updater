@@ -58,7 +58,7 @@ class PubUpdate {
   }
 
   PackageInfo _getPackageInfo(String body) {
-    final packageJson = jsonDecode(body) as Map<String,dynamic>;
+    final packageJson = jsonDecode(body) as Map<String, dynamic>;
 
     if (packageJson.isEmpty) {
       throw PackageInfoNotFoundFailue();
