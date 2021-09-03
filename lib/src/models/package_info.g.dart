@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-// ignore_for_file: implicit_dynamic_parameter
+// ignore_for_file: implicit_dynamic_parameter, cast_nullable_to_non_nullable
 
 part of 'package_info.dart';
 
@@ -20,9 +20,3 @@ PackageInfo _$PackageInfoFromJson(Map<String, dynamic> json) => $checkedCreate(
         return val;
       },
     );
-
-Map<String, dynamic> _$PackageInfoToJson(PackageInfo instance) =>
-    <String, dynamic>{
-      'name': instance.name,
-      'versions': instance.versions,
-    };
