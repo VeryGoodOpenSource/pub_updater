@@ -7,7 +7,7 @@ part 'package_info.g.dart';
 class PackageInfo {
   /// Constructor for a [PackageInfo] object.
   /// Requires a name and list of versions.
-  PackageInfo({required this.name, required this.versions});
+  const PackageInfo({required this.name, required this.versions});
 
   /// Constructor of PackageInfo object from JSON.
   factory PackageInfo.fromJson(Map<String, dynamic> json) =>
