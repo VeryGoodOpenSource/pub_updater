@@ -92,83 +92,91 @@ void main() {
       test('returns false when currentVersion < latestVersion (dev)', () async {
         when(() => response.body).thenReturn(devResponseBody);
         expect(
-            await pubUpdate.isUpToDate(
-              packageName: 'very_good_cli',
-              currentVersion: '3.0.0',
-            ),
-            false);
+          await pubUpdate.isUpToDate(
+            packageName: 'very_good_cli',
+            currentVersion: '3.0.0',
+          ),
+          false,
+        );
       });
 
       test('returns true when currentVersion == latestVersion (dev)', () async {
         when(() => response.body).thenReturn(devResponseBody);
         expect(
-            await pubUpdate.isUpToDate(
-              packageName: 'very_good_cli',
-              currentVersion: '3.0.0-dev.2',
-            ),
-            true);
+          await pubUpdate.isUpToDate(
+            packageName: 'very_good_cli',
+            currentVersion: '3.0.0-dev.2',
+          ),
+          true,
+        );
       });
 
       test('returns false when currentVersion < latestVersion (nullsafety)',
           () async {
         when(() => response.body).thenReturn(nullSafetyReponseBody);
         expect(
-            await pubUpdate.isUpToDate(
-              packageName: 'very_good_cli',
-              currentVersion: '3.0.0',
-            ),
-            false);
+          await pubUpdate.isUpToDate(
+            packageName: 'very_good_cli',
+            currentVersion: '3.0.0',
+          ),
+          false,
+        );
       });
 
       test('returns true when currentVersion == latestVersion (nullsafety)',
           () async {
         when(() => response.body).thenReturn(nullSafetyReponseBody);
         expect(
-            await pubUpdate.isUpToDate(
-              packageName: 'very_good_cli',
-              currentVersion: '3.0.0-nullsafety.1',
-            ),
-            true);
+          await pubUpdate.isUpToDate(
+            packageName: 'very_good_cli',
+            currentVersion: '3.0.0-nullsafety.1',
+          ),
+          true,
+        );
       });
 
       test('returns false when currentVersion < latestVersion (all)', () async {
         when(() => response.body).thenReturn(responseBody);
         expect(
-            await pubUpdate.isUpToDate(
-              packageName: 'very_good_cli',
-              currentVersion: '3.0.0-dev.2',
-            ),
-            false);
+          await pubUpdate.isUpToDate(
+            packageName: 'very_good_cli',
+            currentVersion: '3.0.0-dev.2',
+          ),
+          false,
+        );
       });
 
       test('returns true when currentVersion == latestVersion (all)', () async {
         when(() => response.body).thenReturn(responseBody);
         expect(
-            await pubUpdate.isUpToDate(
-              packageName: 'very_good_cli',
-              currentVersion: '3.0.0-nullsafety.1',
-            ),
-            true);
+          await pubUpdate.isUpToDate(
+            packageName: 'very_good_cli',
+            currentVersion: '3.0.0-nullsafety.1',
+          ),
+          true,
+        );
       });
 
       test('throws PackageInfoRequestFailure on non-200 response', () async {
         when(() => response.statusCode).thenReturn(HttpStatus.notFound);
         await expectLater(
-            pubUpdate.isUpToDate(
-              packageName: 'very_good_cli',
-              currentVersion: '3.0.0',
-            ),
-            throwsA(isA<PackageInfoRequestFailure>()));
+          pubUpdate.isUpToDate(
+            packageName: 'very_good_cli',
+            currentVersion: '3.0.0',
+          ),
+          throwsA(isA<PackageInfoRequestFailure>()),
+        );
       });
 
       test('throws PackageInfoNotFoundFailure when ', () async {
         when(() => response.body).thenReturn(emptyResponseBody);
         await expectLater(
-            pubUpdate.isUpToDate(
-              packageName: 'very_good_cli',
-              currentVersion: '3.0.0',
-            ),
-            throwsA(isA<PackageInfoNotFoundFailue>()));
+          pubUpdate.isUpToDate(
+            packageName: 'very_good_cli',
+            currentVersion: '3.0.0',
+          ),
+          throwsA(isA<PackageInfoNotFoundFailue>()),
+        );
       });
     });
 
