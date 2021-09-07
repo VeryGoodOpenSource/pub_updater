@@ -16,7 +16,7 @@ class PackageInfoNotFoundFailue implements Exception {}
 /// {@endtemplate}
 class PubUpdate {
   ///
-  PubUpdate([http.Client? client]) : _client = client ?? http.Client();
+  const PubUpdate([http.Client? client]) : _client = client ?? http.Client();
 
   /// The pub.dev base url for querying package versions
   static const _baseUrl = 'https://pub.dev/packages/';
