@@ -168,7 +168,8 @@ void main() {
         );
       });
 
-      test('throws PackageInfoNotFoundFailure when ', () async {
+      test('throws PackageInfoNotFoundFailure when response body is empty',
+          () async {
         when(() => response.body).thenReturn(emptyResponseBody);
         await expectLater(
           pubUpdate.isUpToDate(

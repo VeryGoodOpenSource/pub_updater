@@ -28,7 +28,7 @@ class PubUpdate {
     required String packageName,
     required String currentVersion,
   }) async {
-    final url = Uri.parse('${_baseUrl + packageName}.json');
+    final url = Uri.parse('$_baseUrl$packageName.json');
     final response = await _client.get(url);
 
     _validateResponse(response);
@@ -48,8 +48,8 @@ class PubUpdate {
         .run(['dart', 'pub', 'global', 'activate', packageName]);
   }
 
-  void _validateResponse(http.Response res) {
-    switch (res.statusCode) {
+  void _validateResponse(http.Response response) {
+    switch (response.statusCode) {
       case HttpStatus.ok:
         return;
       default:
