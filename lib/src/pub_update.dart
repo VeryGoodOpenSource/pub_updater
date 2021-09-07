@@ -31,7 +31,8 @@ class PubUpdate {
     final url = Uri.parse('$_baseUrl$packageName.json');
     final response = await _client.get(url);
 
-    _validateResponse(response);
+    if (response.statusCode != HttpStatus.ok) throw PackageInfoRequestFailure();
+
     final packageInfo = _getPackageInfo(response.body);
 
     final versionList = packageInfo.versions..sort();
@@ -46,15 +47,6 @@ class PubUpdate {
   }) {
     return processManager
         .run(['dart', 'pub', 'global', 'activate', packageName]);
-  }
-
-  void _validateResponse(http.Response response) {
-    switch (response.statusCode) {
-      case HttpStatus.ok:
-        return;
-      default:
-        throw PackageInfoRequestFailure();
-    }
   }
 
   PackageInfo _getPackageInfo(String body) {
