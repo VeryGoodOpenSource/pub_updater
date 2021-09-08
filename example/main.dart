@@ -1,6 +1,6 @@
 import 'package:pub_update/pub_update.dart';
 
-void main() async {
+Future<void> main() async {
   // Initialize an instance of PubUpdate.
   final pubUpdate = PubUpdate();
 
@@ -10,6 +10,6 @@ void main() async {
 
   if (!upToDate) {
     // Upgrade to the latest version if not up to date.
-    pubUpdate.update(packageName: 'myPackage');
+    await pubUpdate.update(packageName: 'myPackage');
   }
 }
