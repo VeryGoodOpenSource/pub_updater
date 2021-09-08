@@ -5,10 +5,10 @@ Future<void> main() async {
   final pubUpdater = PubUpdater();
 
   // Check whether a package is up to date.
-  final upToDate = await pubUpdater.isUpToDate(
+  final isUpToDate = await pubUpdater.isUpToDate(
       packageName: 'myPackage', currentVersion: '0.1.0');
 
-  if (!upToDate) {
+  if (!isUpToDate) {
     // Upgrade to the latest version if not up to date.
     await pubUpdater.update(packageName: 'myPackage');
   }

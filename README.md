@@ -21,10 +21,10 @@ void main() async {
     final pubUpdater = PubUpdater();
 
     // Check whether or not version 0.1.0 is the latest version of myPackage
-    final upToDate = pubUpdater.isUpToDate(packageName: 'myPackage', currentVersion: '0.1.0'); 
+    final isUpToDate = pubUpdater.isUpToDate(packageName: 'myPackage', currentVersion: '0.1.0'); 
     
     // Trigger an upgrade to the latest version if myPackage is not up to date
-    if (!upToDate) {
+    if (!isUpToDate) {
         pubUpdater.update(packageName: 'myPackage');
     }
 }
