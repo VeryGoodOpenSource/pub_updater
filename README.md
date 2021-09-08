@@ -1,7 +1,7 @@
-# pub_update
+# pub_updater
 
-[![Pub](https://img.shields.io/badge/pub__update-v0.1.0-orange)](https://pub.dev/packages/pub_update)
-[![build](https://github.com/VeryGoodOpenSource/pub_update/actions/workflows/pub_update.yaml/badge.svg?branch=main)](https://github.com/VeryGoodOpenSource/pub_update/actions/workflows)
+[![Pub](https://img.shields.io/pub/v/pub_updater.svg)](https://pub.dev/packages/pub_updater)
+[![build](https://github.com/VeryGoodOpenSource/pub_updater/actions/workflows/pub_updater.yaml/badge.svg?branch=main)](https://github.com/VeryGoodOpenSource/pub_updater/actions/workflows)
 [![style: very good analysis][very_good_analysis_badge]][very_good_analysis_link]
 [![License: MIT][license_badge]][license_link]
 
