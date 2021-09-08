@@ -2,11 +2,12 @@
 
 [![Pub](https://img.shields.io/badge/pub__update-v0.1.0-orange)](https://pub.dev/packages/pub_update)
 [![build](https://github.com/VeryGoodOpenSource/pub_update/actions/workflows/pub_update.yaml/badge.svg?branch=main)](https://github.com/VeryGoodOpenSource/pub_update/actions/workflows)
+[![style: very good analysis][very_good_analysis_badge]][very_good_analysis_link]
 [![License: MIT][license_badge]][license_link]
 
 ---
 
-A Dart package which enables checking whether packages are up to date and updating them.
+A Dart package which enables checking whether packages are up to date and supports updating them.
 
 Intended for use in CLIs for prompting users to auto-update.
 
