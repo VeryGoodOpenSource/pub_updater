@@ -1,15 +1,15 @@
-import 'package:pub_update/pub_update.dart';
+import 'package:pub_updater/pub_updater.dart';
 
 Future<void> main() async {
-  // Initialize an instance of PubUpdate.
-  final pubUpdate = PubUpdate();
+  // Initialize an instance of PubUpdater.
+  final pubUpdater = PubUpdater();
 
   // Check whether a package is up to date.
-  final upToDate = await pubUpdate.isUpToDate(
+  final upToDate = await pubUpdater.isUpToDate(
       packageName: 'myPackage', currentVersion: '0.1.0');
 
   if (!upToDate) {
     // Upgrade to the latest version if not up to date.
-    await pubUpdate.update(packageName: 'myPackage');
+    await pubUpdater.update(packageName: 'myPackage');
   }
 }

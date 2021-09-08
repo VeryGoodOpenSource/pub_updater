@@ -16,15 +16,15 @@ Intended for use in CLIs for prompting users to auto-update.
 import 'package:pub_update/pub_update.dart';
 
 void main() async {
-    // Create an instance of PubUpdate
-    final pubUpdate = PubUpdate();
+    // Create an instance of PubUpdater
+    final pubUpdater = PubUpdater();
 
     // Check whether or not version 0.1.0 is the latest version of myPackage
-    final upToDate = pubUpdate.isUpToDate(packageName: 'myPackage', currentVersion: '0.1.0'); 
+    final upToDate = pubUpdater.isUpToDate(packageName: 'myPackage', currentVersion: '0.1.0'); 
     
     // Trigger an upgrade to the latest version if myPackage is not up to date
     if (!upToDate) {
-        pubUpdate.update(packageName: 'myPackage');
+        pubUpdater.update(packageName: 'myPackage');
     }
 }
 ```

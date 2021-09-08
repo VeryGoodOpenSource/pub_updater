@@ -1,4 +1,4 @@
-name: pub_update
+name: pub_updater
 description: A Dart package which enables checking whether a package is up to date.
 version: 1.0.0+1
 publish_to: none

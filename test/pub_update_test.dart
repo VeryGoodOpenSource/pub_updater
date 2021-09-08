@@ -4,7 +4,7 @@ import 'dart:io';
 import 'package:http/http.dart' show Client, Response;
 import 'package:mocktail/mocktail.dart';
 import 'package:process/process.dart';
-import 'package:pub_update/pub_update.dart';
+import 'package:pub_updater/pub_updater.dart';
 import 'package:test/test.dart';
 
 class MockClient extends Mock implements Client {}
@@ -43,10 +43,10 @@ const emptyResponseBody = '{}';
 const command = ['dart', 'pub', 'global', 'activate', 'very_good_cli'];
 
 void main() {
-  group('PubUpdate', () {
+  group('PubUpdater', () {
     late Client client;
     late Response response;
-    late PubUpdate pubUpdate;
+    late PubUpdater pubUpdater;
     late ProcessManager processManager;
     setUpAll(() {
       registerFallbackValue<Uri>(FakeUri());
@@ -55,7 +55,7 @@ void main() {
     setUp(() {
       client = MockClient();
       response = MockResponse();
-      pubUpdate = PubUpdate(client);
+      pubUpdater = PubUpdater(client);
       processManager = MockProcessManager();
 
       when(() => client.get(any())).thenAnswer((_) async => response);
@@ -67,7 +67,7 @@ void main() {
     });
 
     test('can be instantiated without an explicit http client', () {
-      expect(PubUpdate(), isNotNull);
+      expect(PubUpdater(), isNotNull);
     });
 
     group('isUpToDate', () {
@@ -75,7 +75,7 @@ void main() {
         when(() => response.body).thenReturn(emptyResponseBody);
 
         try {
-          await pubUpdate.isUpToDate(
+          await pubUpdater.isUpToDate(
               packageName: 'very_good_cli', currentVersion: '0.3.3');
         } catch (_) {
           verify(
@@ -92,7 +92,7 @@ void main() {
       test('returns false when currentVersion < latestVersion (dev)', () async {
         when(() => response.body).thenReturn(devResponseBody);
         expect(
-          await pubUpdate.isUpToDate(
+          await pubUpdater.isUpToDate(
             packageName: 'very_good_cli',
             currentVersion: '3.0.0',
           ),
@@ -103,7 +103,7 @@ void main() {
       test('returns true when currentVersion == latestVersion (dev)', () async {
         when(() => response.body).thenReturn(devResponseBody);
         expect(
-          await pubUpdate.isUpToDate(
+          await pubUpdater.isUpToDate(
             packageName: 'very_good_cli',
             currentVersion: '3.0.0-dev.2',
           ),
@@ -115,7 +115,7 @@ void main() {
           () async {
         when(() => response.body).thenReturn(nullSafetyReponseBody);
         expect(
-          await pubUpdate.isUpToDate(
+          await pubUpdater.isUpToDate(
             packageName: 'very_good_cli',
             currentVersion: '3.0.0',
           ),
@@ -127,7 +127,7 @@ void main() {
           () async {
         when(() => response.body).thenReturn(nullSafetyReponseBody);
         expect(
-          await pubUpdate.isUpToDate(
+          await pubUpdater.isUpToDate(
             packageName: 'very_good_cli',
             currentVersion: '3.0.0-nullsafety.1',
           ),
@@ -138,7 +138,7 @@ void main() {
       test('returns false when currentVersion < latestVersion (all)', () async {
         when(() => response.body).thenReturn(responseBody);
         expect(
-          await pubUpdate.isUpToDate(
+          await pubUpdater.isUpToDate(
             packageName: 'very_good_cli',
             currentVersion: '3.0.0-dev.2',
           ),
@@ -149,7 +149,7 @@ void main() {
       test('returns true when currentVersion == latestVersion (all)', () async {
         when(() => response.body).thenReturn(responseBody);
         expect(
-          await pubUpdate.isUpToDate(
+          await pubUpdater.isUpToDate(
             packageName: 'very_good_cli',
             currentVersion: '3.0.0-nullsafety.1',
           ),
@@ -160,7 +160,7 @@ void main() {
       test('throws PackageInfoRequestFailure on non-200 response', () async {
         when(() => response.statusCode).thenReturn(HttpStatus.notFound);
         await expectLater(
-          pubUpdate.isUpToDate(
+          pubUpdater.isUpToDate(
             packageName: 'very_good_cli',
             currentVersion: '3.0.0',
           ),
@@ -172,7 +172,7 @@ void main() {
           () async {
         when(() => response.body).thenReturn(emptyResponseBody);
         await expectLater(
-          pubUpdate.isUpToDate(
+          pubUpdater.isUpToDate(
             packageName: 'very_good_cli',
             currentVersion: '3.0.0',
           ),
@@ -183,7 +183,7 @@ void main() {
 
     group('update', () {
       test('makes correct call to process.run', () async {
-        await pubUpdate.update(
+        await pubUpdater.update(
           packageName: 'very_good_cli',
           processManager: processManager,
         );

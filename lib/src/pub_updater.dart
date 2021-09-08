@@ -3,7 +3,7 @@ import 'dart:io';
 
 import 'package:http/http.dart' as http;
 import 'package:process/process.dart';
-import 'package:pub_update/pub_update.dart';
+import 'package:pub_updater/pub_updater.dart';
 
 /// Exception thrown when the HTTP request fails.
 class PackageInfoRequestFailure implements Exception {}
@@ -14,9 +14,9 @@ class PackageInfoNotFoundFailue implements Exception {}
 /// {@template pub_update}
 /// A Dart package which enables checking whether a package is up to date.
 /// {@endtemplate}
-class PubUpdate {
+class PubUpdater {
   /// {@macro pub_update}
-  PubUpdate([http.Client? client]) : _client = client ?? http.Client();
+  PubUpdater([http.Client? client]) : _client = client ?? http.Client();
 
   /// The pub.dev base url for querying package versions
   static const _baseUrl = 'https://pub.dev/packages/';
