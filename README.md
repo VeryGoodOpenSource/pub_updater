@@ -14,7 +14,7 @@ Intended for use in CLIs for prompting users to auto-update.
 ## Usage
 
 ```dart
-import 'package:pub_update/pub_update.dart';
+import 'package:pub_updater/pub_updater.dart';
 
 void main() async {
     // Create an instance of PubUpdater
