@@ -1,4 +1,4 @@
-name: pub_update
+name: pub_updater
 
 on: [push, pull_request]
 
