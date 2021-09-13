@@ -1,7 +1,8 @@
 # pub_updater
 
-[![Pub](https://img.shields.io/pub/v/pub_updater.svg)](https://pub.dev/packages/pub_updater)
-[![build](https://github.com/VeryGoodOpenSource/pub_updater/actions/workflows/pub_updater.yaml/badge.svg?branch=main)](https://github.com/VeryGoodOpenSource/pub_updater/actions/workflows)
+[![Pub][pub_badge]][pub_link]
+[![build][ci_badge]][ci_link]
+[![coverage][coverage_badge]][ci_link]
 [![style: very good analysis][very_good_analysis_badge]][very_good_analysis_link]
 [![License: MIT][license_badge]][license_link]
 
@@ -17,20 +18,28 @@ Intended for use in CLIs for prompting users to auto-update.
 import 'package:pub_updater/pub_updater.dart';
 
 void main() async {
-    // Create an instance of PubUpdater
-    final pubUpdater = PubUpdater();
+  // Create an instance of PubUpdater
+  final pubUpdater = PubUpdater();
 
-    // Check whether or not version 0.1.0 is the latest version of myPackage
-    final isUpToDate = await pubUpdater.isUpToDate(packageName: 'myPackage', currentVersion: '0.1.0'); 
-    
-    // Trigger an upgrade to the latest version if myPackage is not up to date
-    if (!isUpToDate) {
-        await pubUpdater.update(packageName: 'myPackage');
-    }
+  // Check whether or not version 0.1.0 is the latest version of my_package
+  final isUpToDate = await pubUpdater.isUpToDate(
+    packageName: 'my_package',
+    currentVersion: '0.1.0',
+  );
+
+  // Trigger an upgrade to the latest version if my_package is not up to date
+  if (!isUpToDate) {
+    await pubUpdater.update(packageName: 'my_package');
+  }
 }
 ```
 
+[ci_badge]: https://github.com/VeryGoodOpenSource/pub_updater/actions/workflows/pub_updater.yaml/badge.svg?branch=main
+[ci_link]: https://github.com/VeryGoodOpenSource/pub_updater/actions/workflows
+[coverage_badge]: https://raw.githubusercontent.com/VeryGoodOpenSource/pub_updater/main/coverage_badge.svg
 [license_badge]: https://img.shields.io/badge/license-MIT-blue.svg
 [license_link]: https://opensource.org/licenses/MIT
+[pub_badge]: https://img.shields.io/pub/v/pub_updater.svg
+[pub_link]: https://pub.dev/packages/pub_updater
 [very_good_analysis_badge]: https://img.shields.io/badge/style-very_good_analysis-B22C89.svg
 [very_good_analysis_link]: https://pub.dev/packages/very_good_analysis
