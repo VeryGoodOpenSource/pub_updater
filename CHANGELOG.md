@@ -1,9 +1,15 @@
-# v0.1.0  (2021-09-09)
+# v0.1.1 (2021-09-13)
 
+### Bug Fixes
+
+- use http.get when client is not provided ([#7](https://github.com/VeryGoodOpenSource/pub_updater/issues/7)) ([67ec60c](https://github.com/VeryGoodOpenSource/pub_updater/commit/67ec60c6d194e845af5af77f043fe76d67b87f3b))
 
 ### Features
 
-* implement isUpToDate and update APIs ([#1](https://github.com/VeryGoodOpenSource/pub_update/issues/1)) ([adc1312](https://github.com/VeryGoodOpenSource/pub_update/commit/adc13127067912e721849d56f334bfb7deaebde6))
+- implement isUpToDate and update APIs ([#1](https://github.com/VeryGoodOpenSource/pub_updater/issues/1)) ([adc1312](https://github.com/VeryGoodOpenSource/pub_updater/commit/adc13127067912e721849d56f334bfb7deaebde6))
 
+# v0.1.0 (2021-09-09)
 
+### Features
 
+- implement isUpToDate and update APIs ([#1](https://github.com/VeryGoodOpenSource/pub_update/issues/1)) ([adc1312](https://github.com/VeryGoodOpenSource/pub_update/commit/adc13127067912e721849d56f334bfb7deaebde6))
