@@ -16,11 +16,13 @@ class PackageInfoNotFoundFailue implements Exception {}
 /// {@endtemplate}
 class PubUpdater {
   /// {@macro pub_update}
-  PubUpdater([http.Client? client]) : _client = client ?? http.Client();
+  PubUpdater([http.Client? client]) : _client = client;
 
   /// The pub.dev base url for querying package versions
   static const _baseUrl = 'https://pub.dev/packages/';
-  final http.Client _client;
+  final http.Client? _client;
+
+  Future<http.Response> _get(Uri uri) => _client?.get(uri) ?? http.get(uri);
 
   /// Checks whether or not [currentVersion] is the latest version
   /// for the package associated with [packageName]
@@ -28,8 +30,8 @@ class PubUpdater {
     required String packageName,
     required String currentVersion,
   }) async {
-    final url = Uri.parse('$_baseUrl$packageName.json');
-    final response = await _client.get(url);
+    final uri = Uri.parse('$_baseUrl$packageName.json');
+    final response = await _get(uri);
 
     if (response.statusCode != HttpStatus.ok) throw PackageInfoRequestFailure();
 
