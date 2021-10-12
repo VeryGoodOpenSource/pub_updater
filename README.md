@@ -31,6 +31,9 @@ void main() async {
   if (!isUpToDate) {
     await pubUpdater.update(packageName: 'my_package');
   }
+
+  // You can also query the latest version available for a specific package.
+  final latestVersion = await pubUpdater.getLatestVersion('my_package');
 }
 ```
 
