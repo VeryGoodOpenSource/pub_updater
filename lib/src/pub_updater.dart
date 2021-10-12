@@ -48,8 +48,9 @@ class PubUpdater {
     required String packageName,
     ProcessManager processManager = const LocalProcessManager(),
   }) {
-    return processManager
-        .run(['dart', 'pub', 'global', 'activate', packageName]);
+    return processManager.run(
+      ['dart', 'pub', 'global', 'activate', packageName],
+    );
   }
 
   Future<PackageInfo> _getPackageInfo(String packageName) async {
@@ -64,9 +65,7 @@ class PubUpdater {
   PackageInfo _decodePackageInfo(String body) {
     final packageJson = jsonDecode(body) as Map<String, dynamic>;
 
-    if (packageJson.isEmpty) {
-      throw PackageInfoNotFoundFailure();
-    }
+    if (packageJson.isEmpty) throw PackageInfoNotFoundFailure();
 
     return PackageInfo.fromJson(packageJson);
   }
