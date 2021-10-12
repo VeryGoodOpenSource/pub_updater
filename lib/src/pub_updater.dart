@@ -9,7 +9,7 @@ import 'package:pub_updater/pub_updater.dart';
 class PackageInfoRequestFailure implements Exception {}
 
 /// Exception thrown when the provided package information is not found.
-class PackageInfoNotFoundFailue implements Exception {}
+class PackageInfoNotFoundFailure implements Exception {}
 
 /// {@template pub_update}
 /// A Dart package which enables checking whether a package is up to date.
@@ -30,16 +30,17 @@ class PubUpdater {
     required String packageName,
     required String currentVersion,
   }) async {
-    final uri = Uri.parse('$_baseUrl$packageName.json');
-    final response = await _get(uri);
+    final latestVersion = await getLatestVersion(packageName);
 
-    if (response.statusCode != HttpStatus.ok) throw PackageInfoRequestFailure();
+    return currentVersion == latestVersion;
+  }
 
-    final packageInfo = _getPackageInfo(response.body);
+  /// Returns the latest published version of [packageName].
+  Future<String> getLatestVersion(String packageName) async {
+    final packageInfo = await _getPackageInfo(packageName);
+    final versions = packageInfo.versions..sort();
 
-    final versionList = packageInfo.versions..sort();
-
-    return versionList.last == currentVersion;
+    return versions.last;
   }
 
   /// Updates the package associated with [packageName]
@@ -47,16 +48,24 @@ class PubUpdater {
     required String packageName,
     ProcessManager processManager = const LocalProcessManager(),
   }) {
-    return processManager
-        .run(['dart', 'pub', 'global', 'activate', packageName]);
+    return processManager.run(
+      ['dart', 'pub', 'global', 'activate', packageName],
+    );
   }
 
-  PackageInfo _getPackageInfo(String body) {
+  Future<PackageInfo> _getPackageInfo(String packageName) async {
+    final uri = Uri.parse('$_baseUrl$packageName.json');
+    final response = await _get(uri);
+
+    if (response.statusCode != HttpStatus.ok) throw PackageInfoRequestFailure();
+
+    return _decodePackageInfo(response.body);
+  }
+
+  PackageInfo _decodePackageInfo(String body) {
     final packageJson = jsonDecode(body) as Map<String, dynamic>;
 
-    if (packageJson.isEmpty) {
-      throw PackageInfoNotFoundFailue();
-    }
+    if (packageJson.isEmpty) throw PackageInfoNotFoundFailure();
 
     return PackageInfo.fromJson(packageJson);
   }

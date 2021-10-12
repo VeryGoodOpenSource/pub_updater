@@ -176,7 +176,67 @@ void main() {
             packageName: 'very_good_cli',
             currentVersion: '3.0.0',
           ),
-          throwsA(isA<PackageInfoNotFoundFailue>()),
+          throwsA(isA<PackageInfoNotFoundFailure>()),
+        );
+      });
+    });
+
+    group('getLatestVersion', () {
+      test('makes correct http request', () async {
+        when(() => response.body).thenReturn(emptyResponseBody);
+
+        try {
+          await pubUpdater.getLatestVersion('very_good_cli');
+        } catch (_) {
+          verify(
+            () => client.get(
+              Uri.https(
+                'pub.dev',
+                '/packages/very_good_cli.json',
+              ),
+            ),
+          ).called(1);
+        }
+      });
+
+      test('returns correct version (dev)', () async {
+        when(() => response.body).thenReturn(devResponseBody);
+        expect(
+          await pubUpdater.getLatestVersion('very_good_cli'),
+          equals('3.0.0-dev.2'),
+        );
+      });
+
+      test('returns correct version (nullsafety)', () async {
+        when(() => response.body).thenReturn(nullSafetyReponseBody);
+        expect(
+          await pubUpdater.getLatestVersion('very_good_cli'),
+          equals('3.0.0-nullsafety.1'),
+        );
+      });
+
+      test('returns correct version (all)', () async {
+        when(() => response.body).thenReturn(responseBody);
+        expect(
+          await pubUpdater.getLatestVersion('very_good_cli'),
+          equals('3.0.0-nullsafety.1'),
+        );
+      });
+
+      test('throws PackageInfoRequestFailure on non-200 response', () async {
+        when(() => response.statusCode).thenReturn(HttpStatus.notFound);
+        await expectLater(
+          pubUpdater.getLatestVersion('very_good_cli'),
+          throwsA(isA<PackageInfoRequestFailure>()),
+        );
+      });
+
+      test('throws PackageInfoNotFoundFailure when response body is empty',
+          () async {
+        when(() => response.body).thenReturn(emptyResponseBody);
+        await expectLater(
+          pubUpdater.getLatestVersion('very_good_cli'),
+          throwsA(isA<PackageInfoNotFoundFailure>()),
         );
       });
     });
