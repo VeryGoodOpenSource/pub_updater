@@ -1,3 +1,9 @@
+# v0.2.0 (2021-10-12)
+
+### Features
+
+- add getLatestVersion ([#14](https://github.com/VeryGoodOpenSource/pub_updater/issues/14)) ([b092f77](https://github.com/VeryGoodOpenSource/pub_updater/commit/b092f7709a9a1796d77bf4d265f385f420f1d4d6))
+
 # v0.1.1 (2021-09-13)
 
 ### Bug Fixes
