@@ -3,7 +3,7 @@ import 'dart:io';
 
 import 'package:http/http.dart' as http;
 import 'package:process/process.dart';
-import 'package:pub_updater/pub_updater.dart';
+import 'package:pub_updater/src/models/models.dart';
 
 /// Exception thrown when the HTTP request fails.
 class PackageInfoRequestFailure implements Exception {}
@@ -19,7 +19,7 @@ class PubUpdater {
   PubUpdater([http.Client? client]) : _client = client;
 
   /// The pub.dev base url for querying package versions
-  static const _baseUrl = 'https://pub.dev/packages/';
+  static const _baseUrl = 'https://pub.dev/api/packages/';
   final http.Client? _client;
 
   Future<http.Response> _get(Uri uri) => _client?.get(uri) ?? http.get(uri);
@@ -38,9 +38,7 @@ class PubUpdater {
   /// Returns the latest published version of [packageName].
   Future<String> getLatestVersion(String packageName) async {
     final packageInfo = await _getPackageInfo(packageName);
-    final versions = packageInfo.versions..sort();
-
-    return versions.last;
+    return packageInfo.latest;
   }
 
   /// Updates the package associated with [packageName]
@@ -54,7 +52,7 @@ class PubUpdater {
   }
 
   Future<PackageInfo> _getPackageInfo(String packageName) async {
-    final uri = Uri.parse('$_baseUrl$packageName.json');
+    final uri = Uri.parse('$_baseUrl$packageName');
     final response = await _get(uri);
 
     if (response.statusCode != HttpStatus.ok) throw PackageInfoRequestFailure();
