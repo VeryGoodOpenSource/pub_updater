@@ -14,8 +14,10 @@ PackageInfo _$PackageInfoFromJson(Map<String, dynamic> json) => $checkedCreate(
       ($checkedConvert) {
         final val = PackageInfo(
           name: $checkedConvert('name', (v) => v as String),
-          versions: $checkedConvert('versions',
-              (v) => (v as List<dynamic>).map((e) => e as String).toList()),
+          latest: $checkedConvert(
+              'latest',
+              (v) => const LatestVersionConverter()
+                  .fromJson(v as Map<String, dynamic>)),
         );
         return val;
       },

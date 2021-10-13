@@ -7,6 +7,8 @@ import 'package:process/process.dart';
 import 'package:pub_updater/pub_updater.dart';
 import 'package:test/test.dart';
 
+import 'fixtures/valid_package_info_response.dart';
+
 class MockClient extends Mock implements Client {}
 
 class MockResponse extends Mock implements Response {}
@@ -16,27 +18,6 @@ class MockProcessManager extends Mock implements ProcessManager {}
 class FakeUri extends Fake implements Uri {}
 
 class FakeProcessResult extends Fake implements ProcessResult {}
-
-const responseBody = '''
-{
-  "name": "very_good_cli",
-  "versions": ["3.0.0-nullsafety.1", "3.0.0-dev.2", "3.0.0-dev.1", "3.0.0", "3.0.0-nullsafety.0"]
-}
-''';
-
-const devResponseBody = '''
-{
-  "name": "very_good_cli",
-  "versions": ["3.0.0-dev.2", "3.0.0-dev.1", "3.0.0"]
-}
-''';
-
-const nullSafetyReponseBody = '''
-{
-  "name": "very_good_cli",
-  "versions": ["3.0.0-nullsafety.0", "3.0.0-nullsafety.1", "3.0.0"]
-}
-''';
 
 const emptyResponseBody = '{}';
 
@@ -60,7 +41,7 @@ void main() {
 
       when(() => client.get(any())).thenAnswer((_) async => response);
       when(() => response.statusCode).thenReturn(HttpStatus.ok);
-      when(() => response.body).thenReturn(responseBody);
+      when(() => response.body).thenReturn(validPackageInfoResponseBody);
 
       when(() => processManager.run(any()))
           .thenAnswer((_) => Future.value(FakeProcessResult()));
@@ -76,21 +57,22 @@ void main() {
 
         try {
           await pubUpdater.isUpToDate(
-              packageName: 'very_good_cli', currentVersion: '0.3.3');
-        } catch (_) {
-          verify(
-            () => client.get(
-              Uri.https(
-                'pub.dev',
-                '/packages/very_good_cli.json',
-              ),
+            packageName: 'very_good_cli',
+            currentVersion: '0.3.3',
+          );
+        } catch (_) {}
+
+        verify(
+          () => client.get(
+            Uri.https(
+              'pub.dev',
+              '/api/packages/very_good_cli',
             ),
-          ).called(1);
-        }
+          ),
+        ).called(1);
       });
 
-      test('returns false when currentVersion < latestVersion (dev)', () async {
-        when(() => response.body).thenReturn(devResponseBody);
+      test('returns false when currentVersion < latestVersion', () async {
         expect(
           await pubUpdater.isUpToDate(
             packageName: 'very_good_cli',
@@ -100,58 +82,11 @@ void main() {
         );
       });
 
-      test('returns true when currentVersion == latestVersion (dev)', () async {
-        when(() => response.body).thenReturn(devResponseBody);
+      test('returns true when currentVersion == latestVersion', () async {
         expect(
           await pubUpdater.isUpToDate(
             packageName: 'very_good_cli',
-            currentVersion: '3.0.0-dev.2',
-          ),
-          true,
-        );
-      });
-
-      test('returns false when currentVersion < latestVersion (nullsafety)',
-          () async {
-        when(() => response.body).thenReturn(nullSafetyReponseBody);
-        expect(
-          await pubUpdater.isUpToDate(
-            packageName: 'very_good_cli',
-            currentVersion: '3.0.0',
-          ),
-          false,
-        );
-      });
-
-      test('returns true when currentVersion == latestVersion (nullsafety)',
-          () async {
-        when(() => response.body).thenReturn(nullSafetyReponseBody);
-        expect(
-          await pubUpdater.isUpToDate(
-            packageName: 'very_good_cli',
-            currentVersion: '3.0.0-nullsafety.1',
-          ),
-          true,
-        );
-      });
-
-      test('returns false when currentVersion < latestVersion (all)', () async {
-        when(() => response.body).thenReturn(responseBody);
-        expect(
-          await pubUpdater.isUpToDate(
-            packageName: 'very_good_cli',
-            currentVersion: '3.0.0-dev.2',
-          ),
-          false,
-        );
-      });
-
-      test('returns true when currentVersion == latestVersion (all)', () async {
-        when(() => response.body).thenReturn(responseBody);
-        expect(
-          await pubUpdater.isUpToDate(
-            packageName: 'very_good_cli',
-            currentVersion: '3.0.0-nullsafety.1',
+            currentVersion: '0.4.6',
           ),
           true,
         );
@@ -187,39 +122,23 @@ void main() {
 
         try {
           await pubUpdater.getLatestVersion('very_good_cli');
-        } catch (_) {
-          verify(
-            () => client.get(
-              Uri.https(
-                'pub.dev',
-                '/packages/very_good_cli.json',
-              ),
+        } catch (_) {}
+
+        verify(
+          () => client.get(
+            Uri.https(
+              'pub.dev',
+              '/api/packages/very_good_cli',
             ),
-          ).called(1);
-        }
+          ),
+        ).called(1);
       });
 
-      test('returns correct version (dev)', () async {
-        when(() => response.body).thenReturn(devResponseBody);
+      test('returns correct version', () async {
+        when(() => response.body).thenReturn(validPackageInfoResponseBody);
         expect(
           await pubUpdater.getLatestVersion('very_good_cli'),
-          equals('3.0.0-dev.2'),
-        );
-      });
-
-      test('returns correct version (nullsafety)', () async {
-        when(() => response.body).thenReturn(nullSafetyReponseBody);
-        expect(
-          await pubUpdater.getLatestVersion('very_good_cli'),
-          equals('3.0.0-nullsafety.1'),
-        );
-      });
-
-      test('returns correct version (all)', () async {
-        when(() => response.body).thenReturn(responseBody);
-        expect(
-          await pubUpdater.getLatestVersion('very_good_cli'),
-          equals('3.0.0-nullsafety.1'),
+          equals('0.4.6'),
         );
       });
 
