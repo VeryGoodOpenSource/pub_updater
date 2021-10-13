@@ -1,3 +1,9 @@
+# v0.2.1 (2021-10-13)
+
+### Bug Fixes
+
+- use /api/packages to fetch latest version ([#17](https://github.com/VeryGoodOpenSource/pub_updater/issues/17)) ([23dc699](https://github.com/VeryGoodOpenSource/pub_updater/commit/23dc699104ed137bd536daf99976a78462521fcd))
+
 # v0.2.0 (2021-10-12)
 
 ### Features
