@@ -16,7 +16,7 @@ class PackageInfo {
   /// The name of the package.
   final String name;
 
-  /// The latest versions of the package.
+  /// The latest version of the package.
   @LatestVersionConverter()
   final String latest;
 }
