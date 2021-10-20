@@ -1,4 +1,8 @@
-# pub_updater
+# Pub Updater
+
+[![Very Good Ventures][logo]][very_good_ventures_link]
+
+Developed with 💙 by [Very Good Ventures][very_good_ventures_link] 🦄
 
 [![Pub][pub_badge]][pub_link]
 [![build][ci_badge]][ci_link]
@@ -40,9 +44,11 @@ void main() async {
 [ci_badge]: https://github.com/VeryGoodOpenSource/pub_updater/actions/workflows/pub_updater.yaml/badge.svg?branch=main
 [ci_link]: https://github.com/VeryGoodOpenSource/pub_updater/actions/workflows
 [coverage_badge]: https://raw.githubusercontent.com/VeryGoodOpenSource/pub_updater/main/coverage_badge.svg
+[logo]: https://raw.githubusercontent.com/VeryGoodOpenSource/very_good_cli/main/doc/assets/vgv_logo.png
 [license_badge]: https://img.shields.io/badge/license-MIT-blue.svg
 [license_link]: https://opensource.org/licenses/MIT
 [pub_badge]: https://img.shields.io/pub/v/pub_updater.svg
 [pub_link]: https://pub.dev/packages/pub_updater
 [very_good_analysis_badge]: https://img.shields.io/badge/style-very_good_analysis-B22C89.svg
 [very_good_analysis_link]: https://pub.dev/packages/very_good_analysis
+[very_good_ventures_link]: https://verygood.ventures
