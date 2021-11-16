@@ -15,8 +15,6 @@ class MockResponse extends Mock implements Response {}
 
 class MockProcessManager extends Mock implements ProcessManager {}
 
-class FakeUri extends Fake implements Uri {}
-
 class FakeProcessResult extends Fake implements ProcessResult {}
 
 const emptyResponseBody = '{}';
@@ -30,7 +28,7 @@ void main() {
     late PubUpdater pubUpdater;
     late ProcessManager processManager;
     setUpAll(() {
-      registerFallbackValue<Uri>(FakeUri());
+      registerFallbackValue(Uri());
     });
 
     setUp(() {
