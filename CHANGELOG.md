@@ -1,3 +1,9 @@
+# v0.2.2 (2021-11-16)
+
+### Bug Fixes
+
+- widen dart compatibility ([#20](https://github.com/VeryGoodOpenSource/pub_updater/issues/20)) ([20358a3](https://github.com/VeryGoodOpenSource/pub_updater/commit/20358a3f263d6d7bb95600d2cf99cb35d103b319))
+
 # v0.2.1 (2021-10-13)
 
 ### Bug Fixes
