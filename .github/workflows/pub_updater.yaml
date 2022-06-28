@@ -1,33 +1,17 @@
 name: pub_updater
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 on: [push, pull_request]
 
 jobs:
+  semantic-pull-request:
+    uses: VeryGoodOpenSource/very_good_workflows/.github/workflows/semantic_pull_request.yml@v1
+
   build:
-    runs-on: ubuntu-latest
-
-    steps:
-      - uses: actions/checkout@v2
-
-      - uses: dart-lang/setup-dart@v1
-
-      - name: Install Dependencies
-        run: dart pub get
-
-      - name: Format
-        run: dart format --set-exit-if-changed .
-
-      - name: Analyze
-        run: dart analyze --fatal-infos --fatal-warnings .
-
-      - name: Run Tests
-        run: |
-          dart pub global activate test_coverage
-          export PATH=$PATH:$HOME/.pub-cache/bin
-          test_coverage
-
-      - name: Check Code Coverage
-        uses: VeryGoodOpenSource/very_good_coverage@v1.1.1
+    uses: VeryGoodOpenSource/very_good_workflows/.github/workflows/dart_package.yml@v1
 
   pana:
     runs-on: ubuntu-latest
