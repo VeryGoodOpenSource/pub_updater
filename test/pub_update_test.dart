@@ -21,11 +21,16 @@ const emptyResponseBody = '{}';
 
 const command = ['dart', 'pub', 'global', 'activate', 'very_good_cli'];
 
+const customDomain = 'custom-domain.com';
+
+const customBaseUrl = 'https://$customDomain/api/packages/';
+
 void main() {
   group('PubUpdater', () {
     late Client client;
     late Response response;
     late PubUpdater pubUpdater;
+    late PubUpdater pubUpdaterWithCustomBaseURL;
     late ProcessManager processManager;
     setUpAll(() {
       registerFallbackValue(Uri());
@@ -35,6 +40,10 @@ void main() {
       client = MockClient();
       response = MockResponse();
       pubUpdater = PubUpdater(client);
+      pubUpdaterWithCustomBaseURL = PubUpdater(
+        client,
+        customBaseUrl,
+      );
       processManager = MockProcessManager();
 
       when(() => client.get(any())).thenAnswer((_) async => response);
@@ -49,8 +58,19 @@ void main() {
       expect(PubUpdater(), isNotNull);
     });
 
+    test('cannot be instantiated with incorrect custom base URL', () {
+      expect(
+        () => PubUpdater(null, 'this-is-wrong.com'),
+        throwsA(TypeMatcher<AssertionError>()),
+      );
+    });
+
+    test('can be instantiated with correct custom base URL', () {
+      expect(PubUpdater(null, customBaseUrl), isNotNull);
+    });
+
     group('isUpToDate', () {
-      test('makes correct http request', () async {
+      test('makes correct http request (default)', () async {
         when(() => response.body).thenReturn(emptyResponseBody);
 
         try {
@@ -64,6 +84,26 @@ void main() {
           () => client.get(
             Uri.https(
               'pub.dev',
+              '/api/packages/very_good_cli',
+            ),
+          ),
+        ).called(1);
+      });
+
+      test('makes correct http request (custom domain)', () async {
+        when(() => response.body).thenReturn(emptyResponseBody);
+
+        try {
+          await pubUpdaterWithCustomBaseURL.isUpToDate(
+            packageName: 'very_good_cli',
+            currentVersion: '0.3.3',
+          );
+        } catch (_) {}
+
+        verify(
+          () => client.get(
+            Uri.https(
+              customDomain,
               '/api/packages/very_good_cli',
             ),
           ),
