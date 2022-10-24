@@ -155,7 +155,7 @@ void main() {
     });
 
     group('getLatestVersion', () {
-      test('makes correct http request', () async {
+      test('makes correct http request (default)', () async {
         when(() => response.body).thenReturn(emptyResponseBody);
 
         try {
@@ -166,6 +166,23 @@ void main() {
           () => client.get(
             Uri.https(
               'pub.dev',
+              '/api/packages/very_good_cli',
+            ),
+          ),
+        ).called(1);
+      });
+
+      test('makes correct http request (custom domain)', () async {
+        when(() => response.body).thenReturn(emptyResponseBody);
+
+        try {
+          await pubUpdaterWithCustomBaseURL.getLatestVersion('very_good_cli');
+        } catch (_) {}
+
+        verify(
+          () => client.get(
+            Uri.https(
+              customDomain,
               '/api/packages/very_good_cli',
             ),
           ),
