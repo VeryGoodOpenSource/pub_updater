@@ -61,7 +61,7 @@ void main() {
     test('cannot be instantiated with incorrect custom base URL', () {
       expect(
         () => PubUpdater(null, 'this-is-wrong.com'),
-        throwsA(TypeMatcher<AssertionError>()),
+        throwsA(isA<AssertionError>()),
       );
     });
 
