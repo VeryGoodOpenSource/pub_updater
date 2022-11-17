@@ -19,17 +19,12 @@ const _defaultBaseUrl = 'https://pub.dev/api/packages/';
 /// {@endtemplate}
 class PubUpdater {
   /// {@macro pub_update}
-  PubUpdater([http.Client? client, String customBaseUrl = _defaultBaseUrl])
-      : assert(
-          _isValidBaseURL(customBaseUrl),
-          '$customBaseUrl is not a valid pub api URL!',
-        ),
-        _client = client,
-        _baseUrl = customBaseUrl;
+  PubUpdater([http.Client? client, String baseUrl = _defaultBaseUrl])
+      : _client = client,
+        _baseUrl = baseUrl;
 
-  /// The base url used for querying package versions
-  final String _baseUrl;
   final http.Client? _client;
+  final String _baseUrl;
 
   Future<http.Response> _get(Uri uri) => _client?.get(uri) ?? http.get(uri);
 
@@ -75,11 +70,5 @@ class PubUpdater {
     if (packageJson.isEmpty) throw PackageInfoNotFoundFailure();
 
     return PackageInfo.fromJson(packageJson);
-  }
-
-  /// Checks whether the passed [baseUrl] is a valid pub api url
-  static bool _isValidBaseURL(String baseUrl) {
-    return (Uri.tryParse(baseUrl)?.isAbsolute ?? false) &&
-        baseUrl.endsWith('/api/packages/');
   }
 }
