@@ -52,7 +52,7 @@ void main() {
       expect(PubUpdater(), isNotNull);
     });
 
-    test('can be instantiated with correct custom base URL', () {
+    test('can be instantiated with a custom base url', () {
       expect(PubUpdater(null, customBaseUrl), isNotNull);
     });
 
@@ -77,7 +77,7 @@ void main() {
         ).called(1);
       });
 
-      test('makes correct http request with custom base url', () async {
+      test('makes correct http request with a custom base url', () async {
         when(() => response.body).thenReturn(emptyResponseBody);
         pubUpdater = PubUpdater(client, customBaseUrl);
         try {
@@ -156,7 +156,7 @@ void main() {
         ).called(1);
       });
 
-      test('makes correct http request with custom base url', () async {
+      test('makes correct http request with a custom base url', () async {
         when(() => response.body).thenReturn(emptyResponseBody);
         pubUpdater = PubUpdater(client, customBaseUrl);
         try {
