@@ -80,6 +80,7 @@ void main() {
       test('makes correct http request with a custom base url', () async {
         when(() => response.body).thenReturn(emptyResponseBody);
         pubUpdater = PubUpdater(client, customBaseUrl);
+
         try {
           await pubUpdater.isUpToDate(
             packageName: 'very_good_cli',
@@ -159,6 +160,7 @@ void main() {
       test('makes correct http request with a custom base url', () async {
         when(() => response.body).thenReturn(emptyResponseBody);
         pubUpdater = PubUpdater(client, customBaseUrl);
+
         try {
           await pubUpdater.getLatestVersion('very_good_cli');
         } catch (_) {}
