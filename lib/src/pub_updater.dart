@@ -11,16 +11,20 @@ class PackageInfoRequestFailure implements Exception {}
 /// Exception thrown when the provided package information is not found.
 class PackageInfoNotFoundFailure implements Exception {}
 
+/// The pub.dev base url for querying package versions
+const _defaultBaseUrl = 'https://pub.dev/api/packages/';
+
 /// {@template pub_update}
 /// A Dart package which enables checking whether a package is up to date.
 /// {@endtemplate}
 class PubUpdater {
   /// {@macro pub_update}
-  PubUpdater([http.Client? client]) : _client = client;
+  PubUpdater([http.Client? client, String baseUrl = _defaultBaseUrl])
+      : _client = client,
+        _baseUrl = baseUrl;
 
-  /// The pub.dev base url for querying package versions
-  static const _baseUrl = 'https://pub.dev/api/packages/';
   final http.Client? _client;
+  final String _baseUrl;
 
   Future<http.Response> _get(Uri uri) => _client?.get(uri) ?? http.get(uri);
 
