@@ -21,12 +21,15 @@ const emptyResponseBody = '{}';
 
 const command = ['dart', 'pub', 'global', 'activate', 'very_good_cli'];
 
+const customBaseUrl = 'https://custom-domain.com/api/packages/';
+
 void main() {
   group('PubUpdater', () {
     late Client client;
     late Response response;
     late PubUpdater pubUpdater;
     late ProcessManager processManager;
+
     setUpAll(() {
       registerFallbackValue(Uri());
     });
@@ -49,6 +52,10 @@ void main() {
       expect(PubUpdater(), isNotNull);
     });
 
+    test('can be instantiated with a custom base url', () {
+      expect(PubUpdater(null, customBaseUrl), isNotNull);
+    });
+
     group('isUpToDate', () {
       test('makes correct http request', () async {
         when(() => response.body).thenReturn(emptyResponseBody);
@@ -66,6 +73,24 @@ void main() {
               'pub.dev',
               '/api/packages/very_good_cli',
             ),
+          ),
+        ).called(1);
+      });
+
+      test('makes correct http request with a custom base url', () async {
+        when(() => response.body).thenReturn(emptyResponseBody);
+        pubUpdater = PubUpdater(client, customBaseUrl);
+
+        try {
+          await pubUpdater.isUpToDate(
+            packageName: 'very_good_cli',
+            currentVersion: '0.3.3',
+          );
+        } catch (_) {}
+
+        verify(
+          () => client.get(
+            Uri.parse('${customBaseUrl}very_good_cli'),
           ),
         ).called(1);
       });
@@ -128,6 +153,21 @@ void main() {
               'pub.dev',
               '/api/packages/very_good_cli',
             ),
+          ),
+        ).called(1);
+      });
+
+      test('makes correct http request with a custom base url', () async {
+        when(() => response.body).thenReturn(emptyResponseBody);
+        pubUpdater = PubUpdater(client, customBaseUrl);
+
+        try {
+          await pubUpdater.getLatestVersion('very_good_cli');
+        } catch (_) {}
+
+        verify(
+          () => client.get(
+            Uri.parse('${customBaseUrl}very_good_cli'),
           ),
         ).called(1);
       });
