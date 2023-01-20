@@ -221,7 +221,8 @@ void main() {
         verify(() => processManager.run(command)).called(1);
       });
 
-      test('makes correct call to process.run with version constraint', () async {
+      test('makes correct call to process.run with version constraint',
+          () async {
         await pubUpdater.update(
           packageName: 'very_good_cli',
           processManager: processManager,
