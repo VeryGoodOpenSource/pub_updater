@@ -49,9 +49,17 @@ class PubUpdater {
   Future<ProcessResult> update({
     required String packageName,
     ProcessManager processManager = const LocalProcessManager(),
+    String? versionConstraint,
   }) {
     return processManager.run(
-      ['dart', 'pub', 'global', 'activate', packageName],
+      [
+        'dart',
+        'pub',
+        'global',
+        'activate',
+        packageName,
+        if (versionConstraint != null) versionConstraint,
+      ],
     );
   }
 
