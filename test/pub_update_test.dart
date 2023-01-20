@@ -19,7 +19,21 @@ class FakeProcessResult extends Fake implements ProcessResult {}
 
 const emptyResponseBody = '{}';
 
-const command = ['dart', 'pub', 'global', 'activate', 'very_good_cli'];
+const command = [
+  'dart',
+  'pub',
+  'global',
+  'activate',
+  'very_good_cli',
+];
+const commandWithConstraint = [
+  'dart',
+  'pub',
+  'global',
+  'activate',
+  'very_good_cli',
+  '>=0.4.0',
+];
 
 const customBaseUrl = 'https://custom-domain.com/api/packages/';
 
@@ -205,6 +219,15 @@ void main() {
           processManager: processManager,
         );
         verify(() => processManager.run(command)).called(1);
+      });
+
+      test('makes correct call to process.run with version constraint', () async {
+        await pubUpdater.update(
+          packageName: 'very_good_cli',
+          processManager: processManager,
+          versionConstraint: '>=0.4.0',
+        );
+        verify(() => processManager.run(commandWithConstraint)).called(1);
       });
     });
   });
