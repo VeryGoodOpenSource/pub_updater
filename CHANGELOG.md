@@ -1,4 +1,10 @@
-# [0.2.3](https://github.com/VeryGoodOpenSource/pub_updater/compare/v0.2.2...v0.2.3) (2022-11-17)
+# [0.2.4](https://github.com/VeryGoodOpenSource/pub_updater/compare/v0.2.3...v0.2.4) (2023-01-23)
+
+### Features
+
+- add version constraints to update method ([#37](https://github.com/VeryGoodOpenSource/pub_updater/issues/37)) ([ec14539](https://github.com/VeryGoodOpenSource/pub_updater/commit/ec145392b76635123615556ad3e03c87e12a7fa4))
+
+## [0.2.3](https://github.com/VeryGoodOpenSource/pub_updater/compare/v0.2.2...v0.2.3) (2022-11-17)
 
 ### Features
 
