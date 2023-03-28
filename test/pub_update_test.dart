@@ -132,7 +132,7 @@ void main() {
 
       test(
         '''returns true when currentVersion is pre release and latestVersion is stable''',
-            () async {
+        () async {
           expect(
             await pubUpdater.isUpToDate(
               packageName: 'very_good_cli',
@@ -152,12 +152,12 @@ void main() {
 
           when(() => client.get(any())).thenAnswer((_) async => response);
           when(() => response.statusCode).thenReturn(HttpStatus.ok);
-          when(() => response.body).thenReturn(preReleasePackageInfoResponseBody);
+          when(() => response.body)
+              .thenReturn(preReleasePackageInfoResponseBody);
 
           when(() => processManager.run(any()))
               .thenAnswer((_) => Future.value(FakeProcessResult()));
         });
-
 
         test('returns false when currentVersion < latestVersion', () async {
           expect(
