@@ -1,5 +1,5 @@
 // ignore_for_file: prefer_single_quotes, lines_longer_than_80_chars
-// Generated from: https://pub.dev/api/packages/very_good_cli
+// Generated from: https://pub.dev/api/packages/mason
 
 import 'dart:convert';
 
