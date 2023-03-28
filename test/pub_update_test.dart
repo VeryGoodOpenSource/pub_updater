@@ -7,8 +7,7 @@ import 'package:process/process.dart';
 import 'package:pub_updater/pub_updater.dart';
 import 'package:test/test.dart';
 
-import 'fixtures/pre_release_package_info_response.dart';
-import 'fixtures/valid_package_info_response.dart';
+import 'fixtures/fixtures.dart';
 
 class MockClient extends Mock implements Client {}
 
