@@ -7,6 +7,7 @@ import 'package:process/process.dart';
 import 'package:pub_updater/pub_updater.dart';
 import 'package:test/test.dart';
 
+import 'fixtures/pre_release_package_info_response.dart';
 import 'fixtures/valid_package_info_response.dart';
 
 class MockClient extends Mock implements Client {}
@@ -127,6 +128,56 @@ void main() {
           ),
           true,
         );
+      });
+
+      test(
+        '''returns true when currentVersion is pre release and latestVersion is stable''',
+            () async {
+          expect(
+            await pubUpdater.isUpToDate(
+              packageName: 'very_good_cli',
+              currentVersion: '0.4.0-dev.1',
+            ),
+            true,
+          );
+        },
+      );
+
+      group('pre releases', () {
+        setUp(() {
+          client = MockClient();
+          response = MockResponse();
+          pubUpdater = PubUpdater(client);
+          processManager = MockProcessManager();
+
+          when(() => client.get(any())).thenAnswer((_) async => response);
+          when(() => response.statusCode).thenReturn(HttpStatus.ok);
+          when(() => response.body).thenReturn(preReleasePackageInfoResponseBody);
+
+          when(() => processManager.run(any()))
+              .thenAnswer((_) => Future.value(FakeProcessResult()));
+        });
+
+
+        test('returns false when currentVersion < latestVersion', () async {
+          expect(
+            await pubUpdater.isUpToDate(
+              packageName: 'mason',
+              currentVersion: '0.1.0-dev.47',
+            ),
+            false,
+          );
+        });
+
+        test('returns true when currentVersion == latestVersion', () async {
+          expect(
+            await pubUpdater.isUpToDate(
+              packageName: 'mason',
+              currentVersion: '0.1.0-dev.48',
+            ),
+            true,
+          );
+        });
       });
 
       test('throws PackageInfoRequestFailure on non-200 response', () async {

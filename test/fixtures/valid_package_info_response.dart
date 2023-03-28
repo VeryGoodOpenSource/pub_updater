@@ -878,3 +878,4 @@ const validPackageInfoResponse = {
     }
   ]
 };
+
