@@ -41,8 +41,7 @@ class PubUpdater {
     final latestVersionDesc = Version.parse(latestVersion);
 
     if (!latestVersionDesc.isPreRelease && currentVersionDesc.isPreRelease) {
-      // If there is a stable version available, pre release versions are not
-      // considered out of date
+      // If the current version is a pre-release but the latest isn't, skip the version checking.
       return true;
     }
 
