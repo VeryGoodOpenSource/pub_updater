@@ -1,3 +1,9 @@
+# [0.3.0](https://github.com/VeryGoodOpenSource/pub_updater/compare/v0.2.4...v0.3.0) (2023-04-11)
+
+### Bug Fixes
+
+- avoid false negatives when the current version is a pre-release and there is a prior stable release on pub ([#41](https://github.com/VeryGoodOpenSource/pub_updater/issues/41)) ([0a14ccd](https://github.com/VeryGoodOpenSource/pub_updater/commit/0a14ccdbedac8caa130cffeb3ea355483bce64d5))
+
 # [0.2.4](https://github.com/VeryGoodOpenSource/pub_updater/compare/v0.2.3...v0.2.4) (2023-01-23)
 
 ### Features
