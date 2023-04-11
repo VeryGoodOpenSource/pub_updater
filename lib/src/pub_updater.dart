@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:http/http.dart' as http;
 import 'package:process/process.dart';
+import 'package:pub_semver/pub_semver.dart';
 import 'package:pub_updater/src/models/models.dart';
 
 /// Exception thrown when the HTTP request fails.
@@ -35,6 +36,15 @@ class PubUpdater {
     required String currentVersion,
   }) async {
     final latestVersion = await getLatestVersion(packageName);
+
+    final currentVersionDesc = Version.parse(currentVersion);
+    final latestVersionDesc = Version.parse(latestVersion);
+
+    if (!latestVersionDesc.isPreRelease && currentVersionDesc.isPreRelease) {
+      // If the current version is a pre-release but the latest isn't,
+      // skip the version checking.
+      return true;
+    }
 
     return currentVersion == latestVersion;
   }
