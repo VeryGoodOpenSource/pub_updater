@@ -32,8 +32,10 @@ const commandWithCustomBaseUrl = [
   'global',
   'activate',
   'very_good_cli',
-  '-u',
+  '--hosted-url',
   customBaseUrl,
+  '--source',
+  'hosted',
 ];
 const commandWithConstraint = [
   'dart',
@@ -50,8 +52,10 @@ const commandWithConstraintAndCustomBaseUrl = [
   'activate',
   'very_good_cli',
   '>=0.4.0',
-  '-u',
+  '--hosted-url',
   customBaseUrl,
+  '--source',
+  'hosted',
 ];
 
 const customBaseUrl = 'https://custom-domain.com';
