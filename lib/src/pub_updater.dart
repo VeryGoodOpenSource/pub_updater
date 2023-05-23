@@ -72,7 +72,12 @@ class PubUpdater {
         'activate',
         packageName,
         if (versionConstraint != null) versionConstraint,
-        if (_baseUrl != _defaultBaseUrl) ...['-u', _baseUrl]
+        if (_baseUrl != _defaultBaseUrl) ...[
+          '--hosted-url',
+          _baseUrl,
+          '--source',
+          'hosted'
+        ]
       ],
     );
   }
