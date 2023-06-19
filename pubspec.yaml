@@ -1,6 +1,6 @@
 name: pub_updater
 description: A Dart package which enables checking whether a package is up to date.
-version: 0.3.0
+version: 0.3.1
 homepage: https://github.com/VeryGoodOpenSource/pub_updater
 
 environment:

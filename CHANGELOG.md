@@ -1,3 +1,5 @@
+# [0.3.1](https://github.com/VeryGoodOpenSource/pub_updater/compare/v0.3.0...v0.3.1) (2023-06-19)
+
 # [0.3.0](https://github.com/VeryGoodOpenSource/pub_updater/compare/v0.2.4...v0.3.0) (2023-04-11)
 
 ### Bug Fixes
