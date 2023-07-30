@@ -15,8 +15,6 @@ class MockResponse extends Mock implements Response {}
 
 class MockProcessManager extends Mock implements ProcessManager {}
 
-class FakeProcessResult extends Fake implements ProcessResult {}
-
 const emptyResponseBody = '{}';
 
 const command = [
@@ -82,7 +80,7 @@ void main() {
       when(() => response.body).thenReturn(validPackageInfoResponseBody);
 
       when(() => processManager.run(any()))
-          .thenAnswer((_) => Future.value(FakeProcessResult()));
+          .thenAnswer((_) => Future.value(ProcessResult(42, 0, '', '')));
     });
 
     test('can be instantiated without an explicit http client', () {
@@ -178,7 +176,7 @@ void main() {
               .thenReturn(preReleasePackageInfoResponseBody);
 
           when(() => processManager.run(any()))
-              .thenAnswer((_) => Future.value(FakeProcessResult()));
+              .thenAnswer((_) => Future.value(ProcessResult(42, 0, '', '')));
         });
 
         test('returns false when currentVersion < latestVersion', () async {
