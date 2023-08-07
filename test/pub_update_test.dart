@@ -24,6 +24,17 @@ const command = [
   'activate',
   'very_good_cli',
 ];
+const commandWithCustomBaseUrl = [
+  'dart',
+  'pub',
+  'global',
+  'activate',
+  'very_good_cli',
+  '--hosted-url',
+  customBaseUrl,
+  '--source',
+  'hosted',
+];
 const commandWithConstraint = [
   'dart',
   'pub',
@@ -32,8 +43,20 @@ const commandWithConstraint = [
   'very_good_cli',
   '>=0.4.0',
 ];
+const commandWithConstraintAndCustomBaseUrl = [
+  'dart',
+  'pub',
+  'global',
+  'activate',
+  'very_good_cli',
+  '>=0.4.0',
+  '--hosted-url',
+  customBaseUrl,
+  '--source',
+  'hosted',
+];
 
-const customBaseUrl = 'https://custom-domain.com/api/packages/';
+const customBaseUrl = 'https://custom-domain.com';
 
 void main() {
   group('PubUpdater', () {
@@ -102,7 +125,7 @@ void main() {
 
         verify(
           () => client.get(
-            Uri.parse('${customBaseUrl}very_good_cli'),
+            Uri.parse('$customBaseUrl/api/packages/very_good_cli'),
           ),
         ).called(1);
       });
@@ -229,7 +252,7 @@ void main() {
 
         verify(
           () => client.get(
-            Uri.parse('${customBaseUrl}very_good_cli'),
+            Uri.parse('$customBaseUrl/api/packages/very_good_cli'),
           ),
         ).called(1);
       });
@@ -268,6 +291,14 @@ void main() {
         );
         verify(() => processManager.run(command)).called(1);
       });
+      test('makes correct call to process.run with customBaseUrl', () async {
+        pubUpdater = PubUpdater(client, customBaseUrl);
+        await pubUpdater.update(
+          packageName: 'very_good_cli',
+          processManager: processManager,
+        );
+        verify(() => processManager.run(commandWithCustomBaseUrl)).called(1);
+      });
 
       test('makes correct call to process.run with version constraint',
           () async {
@@ -277,6 +308,18 @@ void main() {
           versionConstraint: '>=0.4.0',
         );
         verify(() => processManager.run(commandWithConstraint)).called(1);
+      });
+
+      test('makes correct call to process.run with version constraint',
+          () async {
+        pubUpdater = PubUpdater(client, customBaseUrl);
+        await pubUpdater.update(
+          packageName: 'very_good_cli',
+          processManager: processManager,
+          versionConstraint: '>=0.4.0',
+        );
+        verify(() => processManager.run(commandWithConstraintAndCustomBaseUrl))
+            .called(1);
       });
     });
   });
