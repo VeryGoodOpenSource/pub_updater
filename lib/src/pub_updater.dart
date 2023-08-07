@@ -13,7 +13,10 @@ class PackageInfoRequestFailure implements Exception {}
 class PackageInfoNotFoundFailure implements Exception {}
 
 /// The pub.dev base url for querying package versions
-const _defaultBaseUrl = 'https://pub.dev/api/packages/';
+const _defaultBaseUrl = 'https://pub.dev';
+
+/// The pub.dev api query path for querying packages
+const _pubPackagesPath = '/api/packages/';
 
 /// {@template pub_update}
 /// A Dart package which enables checking whether a package is up to date.
@@ -69,12 +72,18 @@ class PubUpdater {
         'activate',
         packageName,
         if (versionConstraint != null) versionConstraint,
+        if (_baseUrl != _defaultBaseUrl) ...[
+          '--hosted-url',
+          _baseUrl,
+          '--source',
+          'hosted'
+        ]
       ],
     );
   }
 
   Future<PackageInfo> _getPackageInfo(String packageName) async {
-    final uri = Uri.parse('$_baseUrl$packageName');
+    final uri = Uri.parse('$_baseUrl$_pubPackagesPath$packageName');
     final response = await _get(uri);
 
     if (response.statusCode != HttpStatus.ok) throw PackageInfoRequestFailure();
