@@ -76,8 +76,8 @@ class PubUpdater {
           '--hosted-url',
           _baseUrl,
           '--source',
-          'hosted'
-        ]
+          'hosted',
+        ],
       ],
     );
   }
