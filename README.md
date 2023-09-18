@@ -42,8 +42,8 @@ void main() async {
 }
 ```
 
-[ci_badge]: https://github.com/VeryGoodOpenSource/pub_updater/actions/workflows/pub_updater.yaml/badge.svg?branch=main
-[ci_link]: https://github.com/VeryGoodOpenSource/pub_updater/actions/workflows
+[ci_badge]: https://github.com/VeryGoodOpenSource/pub_updater/actions/workflows/main.yaml/badge.svg
+[ci_link]: https://github.com/VeryGoodOpenSource/pub_updater/actions/workflows/main.yaml?query=branch%3Amain
 [coverage_badge]: https://raw.githubusercontent.com/VeryGoodOpenSource/pub_updater/main/coverage_badge.svg
 [logo_black]: https://raw.githubusercontent.com/VGVentures/very_good_brand/main/styles/README/vgv_logo_black.png#gh-light-mode-only
 [logo_white]: https://raw.githubusercontent.com/VGVentures/very_good_brand/main/styles/README/vgv_logo_white.png#gh-dark-mode-only
