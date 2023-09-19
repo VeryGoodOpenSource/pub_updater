@@ -1,3 +1,8 @@
+# 0.4.0
+
+- fix!: activation of package on self-hosted url ([#46](https://github.com/VeryGoodOpenSource/pub_updater/pull/46))
+- chore(deps): bump process from 4.2.4 to 5.0.0 ([#52](https://github.com/VeryGoodOpenSource/pub_updater/pull/52))
+
 # [0.3.1](https://github.com/VeryGoodOpenSource/pub_updater/compare/v0.3.0...v0.3.1) (2023-06-19)
 
 # [0.3.0](https://github.com/VeryGoodOpenSource/pub_updater/compare/v0.2.4...v0.3.0) (2023-04-11)
