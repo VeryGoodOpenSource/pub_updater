@@ -1,3 +1,7 @@
+# 0.5.0 
+
+- chore: tighten dependencies ([#62](https://github.com/VeryGoodOpenSource/pub_updater/pull/62))
+
 # 0.4.0
 
 - fix!: activation of package on self-hosted url ([#46](https://github.com/VeryGoodOpenSource/pub_updater/pull/46))
