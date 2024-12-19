@@ -100,7 +100,7 @@ void main() {
             packageName: 'very_good_cli',
             currentVersion: '0.3.3',
           );
-        } catch (_) {}
+        } on Exception catch (_) {}
 
         verify(
           () => client.get(
@@ -121,7 +121,7 @@ void main() {
             packageName: 'very_good_cli',
             currentVersion: '0.3.3',
           );
-        } catch (_) {}
+        } on Exception catch (_) {}
 
         verify(
           () => client.get(
@@ -230,7 +230,7 @@ void main() {
 
         try {
           await pubUpdater.getLatestVersion('very_good_cli');
-        } catch (_) {}
+        } on Exception catch (_) {}
 
         verify(
           () => client.get(
@@ -248,7 +248,7 @@ void main() {
 
         try {
           await pubUpdater.getLatestVersion('very_good_cli');
-        } catch (_) {}
+        } on Exception catch (_) {}
 
         verify(
           () => client.get(
