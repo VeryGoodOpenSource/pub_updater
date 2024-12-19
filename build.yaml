@@ -4,6 +4,7 @@ targets:
       source_gen|combining_builder:
         options:
           ignore_for_file:
+            - document_ignores
             - implicit_dynamic_parameter
             - cast_nullable_to_non_nullable
             - require_trailing_commas

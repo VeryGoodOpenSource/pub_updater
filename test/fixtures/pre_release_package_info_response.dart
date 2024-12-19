@@ -1,3 +1,4 @@
+// Generated test file so these don't apply
 // ignore_for_file: prefer_single_quotes, lines_longer_than_80_chars
 // Generated from: https://pub.dev/api/packages/mason
 
