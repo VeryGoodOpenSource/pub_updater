@@ -24,8 +24,8 @@ const _pubPackagesPath = '/api/packages/';
 class PubUpdater {
   /// {@macro pub_update}
   PubUpdater([http.Client? client, String baseUrl = _defaultBaseUrl])
-      : _client = client,
-        _baseUrl = baseUrl;
+    : _client = client,
+      _baseUrl = baseUrl;
 
   final http.Client? _client;
   final String _baseUrl;
