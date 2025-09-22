@@ -71,7 +71,7 @@ class PubUpdater {
         'global',
         'activate',
         packageName,
-        if (versionConstraint != null) versionConstraint,
+        ?versionConstraint,
         if (_baseUrl != _defaultBaseUrl) ...[
           '--hosted-url',
           _baseUrl,
