@@ -9,16 +9,17 @@ part of 'package_info.dart';
 // **************************************************************************
 
 PackageInfo _$PackageInfoFromJson(Map<String, dynamic> json) => $checkedCreate(
-      'PackageInfo',
-      json,
-      ($checkedConvert) {
-        final val = PackageInfo(
-          name: $checkedConvert('name', (v) => v as String),
-          latest: $checkedConvert(
-              'latest',
-              (v) => const LatestVersionConverter()
-                  .fromJson(v as Map<String, dynamic>)),
-        );
-        return val;
-      },
+  'PackageInfo',
+  json,
+  ($checkedConvert) {
+    final val = PackageInfo(
+      name: $checkedConvert('name', (v) => v as String),
+      latest: $checkedConvert(
+        'latest',
+        (v) =>
+            const LatestVersionConverter().fromJson(v as Map<String, dynamic>),
+      ),
     );
+    return val;
+  },
+);

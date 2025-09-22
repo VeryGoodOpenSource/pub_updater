@@ -4,9 +4,11 @@
 
 import 'dart:convert';
 
-final validPackageInfoResponseBody = json.encode(validPackageInfoResponse);
+final String validPackageInfoResponseBody = json.encode(
+  validPackageInfoResponse,
+);
 
-const validPackageInfoResponse = {
+const Map<String, Object> validPackageInfoResponse = {
   "name": "very_good_cli",
   "latest": {
     "version": "0.4.6",
@@ -876,6 +878,6 @@ const validPackageInfoResponse = {
       "archive_url":
           "https://pub.dartlang.org/packages/very_good_cli/versions/0.4.6.tar.gz",
       "published": "2021-10-07T21:23:42.789542Z",
-    }
+    },
   ],
 };

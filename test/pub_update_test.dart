@@ -1,5 +1,3 @@
-// Not required for test files
-// ignore_for_file: prefer_const_constructors
 import 'dart:io';
 
 import 'package:http/http.dart' show Client, Response;
@@ -25,7 +23,7 @@ const command = [
   'activate',
   'very_good_cli',
 ];
-const commandWithCustomBaseUrl = [
+const List<String> commandWithCustomBaseUrl = [
   'dart',
   'pub',
   'global',
@@ -44,7 +42,7 @@ const commandWithConstraint = [
   'very_good_cli',
   '>=0.4.0',
 ];
-const commandWithConstraintAndCustomBaseUrl = [
+const List<String> commandWithConstraintAndCustomBaseUrl = [
   'dart',
   'pub',
   'global',
@@ -80,8 +78,9 @@ void main() {
       when(() => response.statusCode).thenReturn(HttpStatus.ok);
       when(() => response.body).thenReturn(validPackageInfoResponseBody);
 
-      when(() => processManager.run(any()))
-          .thenAnswer((_) => Future.value(ProcessResult(42, 0, '', '')));
+      when(
+        () => processManager.run(any()),
+      ).thenAnswer((_) => Future.value(ProcessResult(42, 0, '', '')));
     });
 
     test('can be instantiated without an explicit http client', () {
@@ -173,11 +172,13 @@ void main() {
 
           when(() => client.get(any())).thenAnswer((_) async => response);
           when(() => response.statusCode).thenReturn(HttpStatus.ok);
-          when(() => response.body)
-              .thenReturn(preReleasePackageInfoResponseBody);
+          when(
+            () => response.body,
+          ).thenReturn(preReleasePackageInfoResponseBody);
 
-          when(() => processManager.run(any()))
-              .thenAnswer((_) => Future.value(ProcessResult(42, 0, '', '')));
+          when(
+            () => processManager.run(any()),
+          ).thenAnswer((_) => Future.value(ProcessResult(42, 0, '', '')));
         });
 
         test('returns false when currentVersion < latestVersion', () async {
@@ -212,17 +213,19 @@ void main() {
         );
       });
 
-      test('throws PackageInfoNotFoundFailure when response body is empty',
-          () async {
-        when(() => response.body).thenReturn(emptyResponseBody);
-        await expectLater(
-          pubUpdater.isUpToDate(
-            packageName: 'very_good_cli',
-            currentVersion: '3.0.0',
-          ),
-          throwsA(isA<PackageInfoNotFoundFailure>()),
-        );
-      });
+      test(
+        'throws PackageInfoNotFoundFailure when response body is empty',
+        () async {
+          when(() => response.body).thenReturn(emptyResponseBody);
+          await expectLater(
+            pubUpdater.isUpToDate(
+              packageName: 'very_good_cli',
+              currentVersion: '3.0.0',
+            ),
+            throwsA(isA<PackageInfoNotFoundFailure>()),
+          );
+        },
+      );
     });
 
     group('getLatestVersion', () {
@@ -274,14 +277,16 @@ void main() {
         );
       });
 
-      test('throws PackageInfoNotFoundFailure when response body is empty',
-          () async {
-        when(() => response.body).thenReturn(emptyResponseBody);
-        await expectLater(
-          pubUpdater.getLatestVersion('very_good_cli'),
-          throwsA(isA<PackageInfoNotFoundFailure>()),
-        );
-      });
+      test(
+        'throws PackageInfoNotFoundFailure when response body is empty',
+        () async {
+          when(() => response.body).thenReturn(emptyResponseBody);
+          await expectLater(
+            pubUpdater.getLatestVersion('very_good_cli'),
+            throwsA(isA<PackageInfoNotFoundFailure>()),
+          );
+        },
+      );
     });
 
     group('update', () {
@@ -301,27 +306,32 @@ void main() {
         verify(() => processManager.run(commandWithCustomBaseUrl)).called(1);
       });
 
-      test('makes correct call to process.run with version constraint',
-          () async {
-        await pubUpdater.update(
-          packageName: 'very_good_cli',
-          processManager: processManager,
-          versionConstraint: '>=0.4.0',
-        );
-        verify(() => processManager.run(commandWithConstraint)).called(1);
-      });
+      test(
+        'makes correct call to process.run with version constraint',
+        () async {
+          await pubUpdater.update(
+            packageName: 'very_good_cli',
+            processManager: processManager,
+            versionConstraint: '>=0.4.0',
+          );
+          verify(() => processManager.run(commandWithConstraint)).called(1);
+        },
+      );
 
-      test('makes correct call to process.run with version constraint',
-          () async {
-        pubUpdater = PubUpdater(client, customBaseUrl);
-        await pubUpdater.update(
-          packageName: 'very_good_cli',
-          processManager: processManager,
-          versionConstraint: '>=0.4.0',
-        );
-        verify(() => processManager.run(commandWithConstraintAndCustomBaseUrl))
-            .called(1);
-      });
+      test(
+        'makes correct call to process.run with version constraint',
+        () async {
+          pubUpdater = PubUpdater(client, customBaseUrl);
+          await pubUpdater.update(
+            packageName: 'very_good_cli',
+            processManager: processManager,
+            versionConstraint: '>=0.4.0',
+          );
+          verify(
+            () => processManager.run(commandWithConstraintAndCustomBaseUrl),
+          ).called(1);
+        },
+      );
     });
   });
 }

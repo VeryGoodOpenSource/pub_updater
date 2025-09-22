@@ -4,11 +4,11 @@
 
 import 'dart:convert';
 
-final preReleasePackageInfoResponseBody = json.encode(
+final String preReleasePackageInfoResponseBody = json.encode(
   preReleasePackageInfoResponse,
 );
 
-const preReleasePackageInfoResponse = {
+const Map<String, Object> preReleasePackageInfoResponse = {
   "name": "mason",
   "latest": {
     "version": "0.1.0-dev.48",
@@ -424,6 +424,6 @@ const preReleasePackageInfoResponse = {
       "archive_sha256":
           "d122e582f4c332b33d95289aafdea475ff5446e9939338b4b6330e2e488ed4e1",
       "published": "2023-03-24T04:15:07.809166Z",
-    }
+    },
   ],
 };
