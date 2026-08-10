@@ -21,6 +21,20 @@
 
 - add version constraints to update method ([#37](https://github.com/VeryGoodOpenSource/pub_updater/issues/37)) ([ec14539](https://github.com/VeryGoodOpenSource/pub_updater/commit/ec145392b76635123615556ad3e03c87e12a7fa4))
 
+## [0.6.0](https://github.com/VeryGoodOpenSource/pub_updater/compare/v0.5.0...v0.6.0) (2026-08-06)
+
+
+### Features
+
+* upgrade to Dart 3.12 ([#78](https://github.com/VeryGoodOpenSource/pub_updater/issues/78)) ([ffd6a4a](https://github.com/VeryGoodOpenSource/pub_updater/commit/ffd6a4a6d8f6dd721046e3ab30ce4d760f7c9144))
+
+
+### Miscellaneous Chores
+
+* **deps:** bump very_good_analysis from 6.0.0 to 7.0.0 ([#67](https://github.com/VeryGoodOpenSource/pub_updater/issues/67)) ([a5bc03f](https://github.com/VeryGoodOpenSource/pub_updater/commit/a5bc03fce7e3a736e2d6280753cfcecf1f28353d))
+* **deps:** upgrade to very good analysis 10.0.0 ([#71](https://github.com/VeryGoodOpenSource/pub_updater/issues/71)) ([c644cf8](https://github.com/VeryGoodOpenSource/pub_updater/commit/c644cf8e28194499ce78d3352c3e026315e4f379))
+* **deps:** upgrade very_good_analysis to 10.3.0 ([#81](https://github.com/VeryGoodOpenSource/pub_updater/issues/81)) ([bcb7b59](https://github.com/VeryGoodOpenSource/pub_updater/commit/bcb7b59856a63eeb5a5db971fd02d55f72bc8cd4)), closes [#80](https://github.com/VeryGoodOpenSource/pub_updater/issues/80)
+
 ## [0.2.3](https://github.com/VeryGoodOpenSource/pub_updater/compare/v0.2.2...v0.2.3) (2022-11-17)
 
 ### Features
