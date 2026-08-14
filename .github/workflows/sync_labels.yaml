@@ -1,5 +1,9 @@
 name: ♻️ Sync Labels
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 on:
   push:
     paths:
@@ -10,13 +14,4 @@ on:
 
 jobs:
   labels:
-    name: ♻️ Sync labels
-    runs-on: ubuntu-20.04
-    steps:
-      - name: ⤵️ Check out code from GitHub
-        uses: actions/checkout@v7
-
-      - name: 🚀 Run Label Sync
-        uses: srealmoreno/label-sync-action@v2
-        with:
-          config-file: https://raw.githubusercontent.com/VeryGoodOpenSource/.github/main/.github/labels.yml
+    uses: VeryGoodOpenSource/very_good_workflows/.github/workflows/sync_labels.yml@v1.20.1
