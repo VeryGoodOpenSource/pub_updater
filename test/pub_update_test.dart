@@ -16,13 +16,7 @@ class MockProcessManager extends Mock implements ProcessManager {}
 
 const emptyResponseBody = '{}';
 
-const command = [
-  'dart',
-  'pub',
-  'global',
-  'activate',
-  'very_good_cli',
-];
+const command = ['dart', 'pub', 'global', 'activate', 'very_good_cli'];
 const List<String> commandWithCustomBaseUrl = [
   'dart',
   'pub',
@@ -78,9 +72,8 @@ void main() {
       when(() => response.statusCode).thenReturn(HttpStatus.ok);
       when(() => response.body).thenReturn(validPackageInfoResponseBody);
 
-      when(
-        () => processManager.run(any()),
-      ).thenAnswer((_) => Future.value(ProcessResult(42, 0, '', '')));
+      when(() => processManager.run(any()))
+          .thenAnswer((_) => Future.value(ProcessResult(42, 0, '', '')));
     });
 
     test('can be instantiated without an explicit http client', () {
@@ -103,12 +96,7 @@ void main() {
         } on Exception catch (_) {}
 
         verify(
-          () => client.get(
-            Uri.https(
-              'pub.dev',
-              '/api/packages/very_good_cli',
-            ),
-          ),
+          () => client.get(Uri.https('pub.dev', '/api/packages/very_good_cli')),
         ).called(1);
       });
 
@@ -150,18 +138,15 @@ void main() {
         );
       });
 
-      test(
-        '''returns true when currentVersion is pre release and latestVersion is stable''',
-        () async {
-          expect(
-            await pubUpdater.isUpToDate(
-              packageName: 'very_good_cli',
-              currentVersion: '0.4.0-dev.1',
-            ),
-            true,
-          );
-        },
-      );
+      test('''returns true when currentVersion is pre release and latestVersion is stable''', () async {
+        expect(
+          await pubUpdater.isUpToDate(
+            packageName: 'very_good_cli',
+            currentVersion: '0.4.0-dev.1',
+          ),
+          true,
+        );
+      });
 
       group('pre releases', () {
         setUp(() {
@@ -172,13 +157,11 @@ void main() {
 
           when(() => client.get(any())).thenAnswer((_) async => response);
           when(() => response.statusCode).thenReturn(HttpStatus.ok);
-          when(
-            () => response.body,
-          ).thenReturn(preReleasePackageInfoResponseBody);
+          when(() => response.body)
+              .thenReturn(preReleasePackageInfoResponseBody);
 
-          when(
-            () => processManager.run(any()),
-          ).thenAnswer((_) => Future.value(ProcessResult(42, 0, '', '')));
+          when(() => processManager.run(any()))
+              .thenAnswer((_) => Future.value(ProcessResult(42, 0, '', '')));
         });
 
         test('returns false when currentVersion < latestVersion', () async {
@@ -237,12 +220,7 @@ void main() {
         } on Exception catch (_) {}
 
         verify(
-          () => client.get(
-            Uri.https(
-              'pub.dev',
-              '/api/packages/very_good_cli',
-            ),
-          ),
+          () => client.get(Uri.https('pub.dev', '/api/packages/very_good_cli')),
         ).called(1);
       });
 

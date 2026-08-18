@@ -64,22 +64,20 @@ class PubUpdater {
     ProcessManager processManager = const LocalProcessManager(),
     String? versionConstraint,
   }) {
-    return processManager.run(
-      [
-        'dart',
-        'pub',
-        'global',
-        'activate',
-        packageName,
-        ?versionConstraint,
-        if (_baseUrl != _defaultBaseUrl) ...[
-          '--hosted-url',
-          _baseUrl,
-          '--source',
-          'hosted',
-        ],
+    return processManager.run([
+      'dart',
+      'pub',
+      'global',
+      'activate',
+      packageName,
+      ?versionConstraint,
+      if (_baseUrl != _defaultBaseUrl) ...[
+        '--hosted-url',
+        _baseUrl,
+        '--source',
+        'hosted',
       ],
-    );
+    ]);
   }
 
   Future<PackageInfo> _getPackageInfo(String packageName) async {
