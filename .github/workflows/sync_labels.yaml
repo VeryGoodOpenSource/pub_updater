@@ -14,4 +14,4 @@ on:
 
 jobs:
   labels:
-    uses: VeryGoodOpenSource/very_good_workflows/.github/workflows/sync_labels.yml@v1.20.1
+    uses: VeryGoodOpenSource/very_good_workflows/.github/workflows/sync_labels.yml@v1.21.0
