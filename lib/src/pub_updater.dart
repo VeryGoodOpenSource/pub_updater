@@ -7,10 +7,10 @@ import 'package:pub_semver/pub_semver.dart';
 import 'package:pub_updater/src/models/models.dart';
 
 /// Exception thrown when the HTTP request fails.
-class PackageInfoRequestFailure implements Exception {}
+class PackageInfoRequestFailure implements Exception;
 
 /// Exception thrown when the provided package information is not found.
-class PackageInfoNotFoundFailure implements Exception {}
+class PackageInfoNotFoundFailure implements Exception;
 
 /// The pub.dev base url for querying package versions
 const _defaultBaseUrl = 'https://pub.dev';
@@ -23,7 +23,7 @@ const _pubPackagesPath = '/api/packages/';
 /// {@endtemplate}
 class PubUpdater {
   /// {@macro pub_update}
-  PubUpdater([http.Client? client, String baseUrl = _defaultBaseUrl])
+  new([http.Client? client, String baseUrl = _defaultBaseUrl])
     : _client = client,
       _baseUrl = baseUrl;
 
