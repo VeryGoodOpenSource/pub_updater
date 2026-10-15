@@ -8,11 +8,11 @@ import 'package:test/test.dart';
 
 import 'fixtures/fixtures.dart';
 
-class MockClient extends Mock implements Client {}
+class MockClient extends Mock implements Client;
 
-class MockResponse extends Mock implements Response {}
+class MockResponse extends Mock implements Response;
 
-class MockProcessManager extends Mock implements ProcessManager {}
+class MockProcessManager extends Mock implements ProcessManager;
 
 const emptyResponseBody = '{}';
 

@@ -7,11 +7,10 @@ part 'package_info.g.dart';
 class PackageInfo {
   /// Constructor for a [PackageInfo] object.
   /// Requires a name and list of versions.
-  const PackageInfo({required this.name, required this.latest});
+  const new({required this.name, required this.latest});
 
   /// Constructor of PackageInfo object from JSON.
-  factory PackageInfo.fromJson(Map<String, dynamic> json) =>
-      _$PackageInfoFromJson(json);
+  factory fromJson(Map<String, dynamic> json) => _$PackageInfoFromJson(json);
 
   /// The name of the package.
   final String name;
@@ -27,7 +26,7 @@ class PackageInfo {
 class LatestVersionConverter
     implements JsonConverter<String, Map<String, dynamic>> {
   /// {@macro latest_version_converter}
-  const LatestVersionConverter();
+  const new();
 
   @override
   String fromJson(Map<String, dynamic> json) => json['version'] as String;
