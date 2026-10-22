@@ -21,6 +21,18 @@
 
 - add version constraints to update method ([#37](https://github.com/VeryGoodOpenSource/pub_updater/issues/37)) ([ec14539](https://github.com/VeryGoodOpenSource/pub_updater/commit/ec145392b76635123615556ad3e03c87e12a7fa4))
 
+## [0.7.0](https://github.com/VeryGoodOpenSource/pub_updater/compare/v0.6.0...v0.7.0) (2026-10-22)
+
+
+### Features
+
+* **deps:** upgrade to Dart 3.13 ([#89](https://github.com/VeryGoodOpenSource/pub_updater/issues/89)) ([9e169e1](https://github.com/VeryGoodOpenSource/pub_updater/commit/9e169e1967c5171e6a73d1dd90f8ac862c07193e))
+
+
+### Miscellaneous Chores
+
+* **deps:** bump very_good_analysis from 10.3.0 to 11.0.0 ([#91](https://github.com/VeryGoodOpenSource/pub_updater/issues/91)) ([ce604b3](https://github.com/VeryGoodOpenSource/pub_updater/commit/ce604b394146c3573897ca27c6ea48c2773b2178))
+
 ## [0.6.0](https://github.com/VeryGoodOpenSource/pub_updater/compare/v0.5.0...v0.6.0) (2026-08-06)
 
 
