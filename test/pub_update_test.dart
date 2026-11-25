@@ -73,7 +73,7 @@ void main() {
       when(() => response.body).thenReturn(validPackageInfoResponseBody);
 
       when(() => processManager.run(any()))
-          .thenAnswer((_) => Future.value(ProcessResult(42, 0, '', '')));
+          .thenAnswer((_) => Future.syncValue(ProcessResult(42, 0, '', '')));
     });
 
     test('can be instantiated without an explicit http client', () {
@@ -160,8 +160,9 @@ void main() {
           when(() => response.body)
               .thenReturn(preReleasePackageInfoResponseBody);
 
-          when(() => processManager.run(any()))
-              .thenAnswer((_) => Future.value(ProcessResult(42, 0, '', '')));
+          when(
+            () => processManager.run(any()),
+          ).thenAnswer((_) => Future.syncValue(ProcessResult(42, 0, '', '')));
         });
 
         test('returns false when currentVersion < latestVersion', () async {
